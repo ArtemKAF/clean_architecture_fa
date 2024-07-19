@@ -35,4 +35,4 @@ repos:
       - id: flake8
         name: flake8
         types: [python]
-        args: [--config=flake8, src/]
+        args: [--config=.flake8, src/]
