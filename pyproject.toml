@@ -18,6 +18,10 @@ flake8 = "^7.1.0"
 mypy = "^1.10.1"
 pre-commit = "^3.7.1"
 
+
+[tool.poetry.group.tests.dependencies]
+pytest = "^8.2.2"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
@@ -37,3 +41,7 @@ extend-exclude = """
   | migrations
 )/
 """
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
