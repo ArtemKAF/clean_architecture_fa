@@ -22,7 +22,7 @@ class PostgresSettings(BaseSettingsEnv):
     @property
     def dsn(self) -> PostgresDsn:
         return PostgresDsn.build(
-            scheme="postgresql",
+            scheme="postgresql+asyncpg",
             username=self.user,
             password=self.password,
             host=self.host,
