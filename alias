@@ -1,0 +1,38 @@
+#!usr/bin/fish
+
+function run_migration
+  alembic revision --autogenerate -m $argv
+end
+
+function run_upgrade
+  alembic upgrade head
+end
+
+function run_downgrade
+  alembic downgrade $argv
+end
+
+function run_tests
+  python -m pytest -s tests
+end
+
+function run_start
+  uvicorn src.main:app --reload
+end
+
+function show_commands
+  echo "Available commands:"
+  functions | grep '^run_' | string replace -r '^run_' ''
+end
+
+if count $argv > /dev/null
+  set cmd (string replace -r '^' 'run_' $argv[1])
+  if functions -q $cmd
+    set -l remaining_args $argv[2..-1]
+    $cmd $remaining_args
+  else
+    echo "Command not found: $argv[1]"
+  end
+else
+  show_commands
+end
